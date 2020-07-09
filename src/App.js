@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import LoginPage from "./components/login/loginpage";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import * as action from "../src/components/actions";
+import PersonalDetail from "../src/components/PersonalDetails/InputDetaisl";
 
-function App() {
+function App(props) {
+  console.log(props);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div>{props.isLogin === true ? <PersonalDetail /> : <LoginPage />}</div>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  console.log(state);
+  return state;
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(action, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
